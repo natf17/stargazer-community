@@ -23,6 +23,10 @@ public class GatewayRoutesConfig {
                                         .setName("mycmd")
                                         .setFallbackUri("forward:/fallback")))
                         .uri(httpUri))
+                .route("stargazer-test-service", p -> p
+                        .path("/stargazerTestService/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("lb://stargazer-test-service"))
                 .build();
 
     }
