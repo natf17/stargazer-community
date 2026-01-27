@@ -6,10 +6,12 @@ import com.ppublica.stargazer.userservice.application.port.geocoding.GeocodingSe
 import com.ppublica.stargazer.userservice.domain.model.User;
 import com.ppublica.stargazer.userservice.domain.model.UserHomeLocation;
 import com.ppublica.stargazer.userservice.domain.model.UserProfile;
+import com.ppublica.stargazer.userservice.domain.model.UserStatus;
 import com.ppublica.stargazer.userservice.domain.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Component
 public class RegisterUserHandler implements RegisterUserUseCase {
@@ -25,11 +27,14 @@ public class RegisterUserHandler implements RegisterUserUseCase {
     @Override
     public User handle(RegisterUserCommand registerUser) {
 
-        boolean userExists = userRepository.doesUserExistBySubject(registerUser.id());
+        Optional<User> userOpt = userRepository.findById(registerUser.id());
 
-        if(userExists) {
-            throw new UserAlreadyExistsException();
-        }
+        userOpt.ifPresent(user -> {
+            if(user.status() == UserStatus.ACTIVE) {
+                throw new UserAlreadyExistsException();
+            }
+        });
+
 
         GeocodedAddress address = geocodingService.geocode(registerUser.canonicalAddress());
 
@@ -44,8 +49,8 @@ public class RegisterUserHandler implements RegisterUserUseCase {
                 UserHomeLocation.create(
                         address.latitude(),
                         address.longitude(),
-                        address.address())
-
+                        address.address()),
+                UserStatus.ACTIVE
                 );
 
         userRepository.save(newUser);
