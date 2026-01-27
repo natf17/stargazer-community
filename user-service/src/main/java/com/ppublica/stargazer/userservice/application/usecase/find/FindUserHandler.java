@@ -1,6 +1,5 @@
 package com.ppublica.stargazer.userservice.application.usecase.find;
 
-import com.ppublica.stargazer.userservice.application.exception.UserAlreadyExistsException;
 import com.ppublica.stargazer.userservice.application.exception.UserNotFoundException;
 import com.ppublica.stargazer.userservice.domain.model.User;
 import com.ppublica.stargazer.userservice.domain.model.UserStatus;
@@ -17,7 +16,7 @@ public class FindUserHandler implements FindUserUseCase {
     }
 
     @Override
-    public User handle(FindUserCommand command) {
+    public User handle(FindUserQuery command) {
 
         User user = userRepository.findById(command.userId())
                 .orElseThrow(UserNotFoundException::new);

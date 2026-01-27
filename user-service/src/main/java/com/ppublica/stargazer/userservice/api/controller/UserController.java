@@ -3,11 +3,14 @@ package com.ppublica.stargazer.userservice.api.controller;
 import com.ppublica.stargazer.userservice.api.dto.HomeLocationDTO;
 import com.ppublica.stargazer.userservice.api.dto.RegisterUserRequest;
 import com.ppublica.stargazer.userservice.api.dto.UserDto;
-import com.ppublica.stargazer.userservice.application.usecase.find.FindUserCommand;
+import com.ppublica.stargazer.userservice.application.usecase.deregister.DeregisterUserCommand;
+import com.ppublica.stargazer.userservice.application.usecase.deregister.DeregisterUserUseCase;
+import com.ppublica.stargazer.userservice.application.usecase.find.FindUserQuery;
 import com.ppublica.stargazer.userservice.application.usecase.find.FindUserUseCase;
 import com.ppublica.stargazer.userservice.application.usecase.register.RegisterUserCommand;
 import com.ppublica.stargazer.userservice.application.usecase.register.RegisterUserUseCase;
 import com.ppublica.stargazer.userservice.domain.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +23,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final RegisterUserUseCase registerUserUseCase;
     private final FindUserUseCase findUserUseCase;
+    private final DeregisterUserUseCase deregisterUserUseCase;
 
-    public UserController(RegisterUserUseCase registerUserUseCase, FindUserUseCase findUserUseCase) {
+    public UserController(RegisterUserUseCase registerUserUseCase, FindUserUseCase findUserUseCase, DeregisterUserUseCase deregisterUserUseCase) {
         this.registerUserUseCase = registerUserUseCase;
         this.findUserUseCase = findUserUseCase;
+        this.deregisterUserUseCase = deregisterUserUseCase;
     }
 
 
@@ -31,14 +36,13 @@ public class UserController {
     public UserDto user(@AuthenticationPrincipal Jwt jwt) {
         String userId = jwt.getSubject();
 
-        User user = findUserUseCase.handle(new FindUserCommand(userId));
+        User user = findUserUseCase.handle(new FindUserQuery(userId));
 
         return toUserDto(user);
 
     }
 
-    @PostMapping
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public UserDto register(@AuthenticationPrincipal Jwt jwt, @RequestBody RegisterUserRequest registerUserRequest) {
         String userId = jwt.getSubject();
 
@@ -55,11 +59,14 @@ public class UserController {
         return toUserDto(registeredUser);
     }
 
-    @PostMapping
-    @RequestMapping("/deactivate")
+    @PostMapping("/deactivate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deactivate(@AuthenticationPrincipal Jwt jwt) {
-        // user soft-deletes himself
-        throw new UnsupportedOperationException();
+        String userId = jwt.getSubject();
+
+        deregisterUserUseCase.handle(new DeregisterUserCommand(userId));
+
+
     }
 
     @PatchMapping

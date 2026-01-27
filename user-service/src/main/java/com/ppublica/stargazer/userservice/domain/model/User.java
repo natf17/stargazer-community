@@ -32,8 +32,13 @@ public class User {
         return this.status;
     }
 
-    public void deregister() {
+    public void deregister(Instant deregisteredAt) {
         this.status = UserStatus.DEREGISTERED;
+        this.profile.updatedAt(deregisteredAt);
+    }
+
+    public void updatedAt(Instant updatedAt) {
+        this.profile.updatedAt(updatedAt);
     }
 
 }

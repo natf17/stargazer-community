@@ -6,11 +6,11 @@ import java.time.Instant;
  * Immutable user profile entity.
  */
 public class UserProfile {
-    private final String displayName;
-    private final String avatarUrl;
-    private final String timezone;
-    private final Instant createdAt;
-    private final Instant updatedAt;
+    private String displayName;
+    private String avatarUrl;
+    private String timezone;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     private UserProfile(String displayName, String avatarUrl, String timezone, Instant createdAt, Instant updatedAt) {
         this.displayName = displayName;
@@ -34,6 +34,10 @@ public class UserProfile {
 
     public String timezone() {
         return this.timezone;
+    }
+
+    void updatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 
