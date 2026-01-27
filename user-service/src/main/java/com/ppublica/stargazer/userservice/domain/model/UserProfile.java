@@ -40,6 +40,18 @@ public class UserProfile {
         this.updatedAt = updatedAt;
     }
 
+    void displayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    void avatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    void timezone(String timezone) {
+        this.timezone = timezone;
+    }
+
 
 
 

@@ -1,14 +1,16 @@
 package com.ppublica.stargazer.userservice.api.controller;
 
-import com.ppublica.stargazer.userservice.api.dto.HomeLocationDTO;
-import com.ppublica.stargazer.userservice.api.dto.RegisterUserRequest;
-import com.ppublica.stargazer.userservice.api.dto.UserDto;
+import com.ppublica.stargazer.userservice.api.dto.*;
 import com.ppublica.stargazer.userservice.application.usecase.deregister.DeregisterUserCommand;
 import com.ppublica.stargazer.userservice.application.usecase.deregister.DeregisterUserUseCase;
 import com.ppublica.stargazer.userservice.application.usecase.find.FindUserQuery;
 import com.ppublica.stargazer.userservice.application.usecase.find.FindUserUseCase;
 import com.ppublica.stargazer.userservice.application.usecase.register.RegisterUserCommand;
 import com.ppublica.stargazer.userservice.application.usecase.register.RegisterUserUseCase;
+import com.ppublica.stargazer.userservice.application.usecase.updatelocation.UpdateHomeLocationCommand;
+import com.ppublica.stargazer.userservice.application.usecase.updatelocation.UpdateHomeLocationUseCase;
+import com.ppublica.stargazer.userservice.application.usecase.updateprofile.UpdateUserProfileCommand;
+import com.ppublica.stargazer.userservice.application.usecase.updateprofile.UpdateUserProfileUseCase;
 import com.ppublica.stargazer.userservice.domain.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,11 +26,20 @@ public class UserController {
     private final RegisterUserUseCase registerUserUseCase;
     private final FindUserUseCase findUserUseCase;
     private final DeregisterUserUseCase deregisterUserUseCase;
+    private final UpdateHomeLocationUseCase updateHomeLocationUseCase;
+    private final UpdateUserProfileUseCase updateUserProfileUseCase;
 
-    public UserController(RegisterUserUseCase registerUserUseCase, FindUserUseCase findUserUseCase, DeregisterUserUseCase deregisterUserUseCase) {
+    public UserController(RegisterUserUseCase registerUserUseCase,
+                          FindUserUseCase findUserUseCase,
+                          DeregisterUserUseCase deregisterUserUseCase,
+                          UpdateHomeLocationUseCase updateHomeLocationUseCase,
+                          UpdateUserProfileUseCase updateUserProfileUseCase) {
         this.registerUserUseCase = registerUserUseCase;
         this.findUserUseCase = findUserUseCase;
         this.deregisterUserUseCase = deregisterUserUseCase;
+        this.updateHomeLocationUseCase = updateHomeLocationUseCase;
+        this.updateUserProfileUseCase = updateUserProfileUseCase;
+
     }
 
 
@@ -69,10 +80,33 @@ public class UserController {
 
     }
 
-    @PatchMapping
-    public UserDto update(@AuthenticationPrincipal Jwt jwt/*, @RequestBody UserProfileUpdateRequest updateRequest*/) {
+    @PatchMapping("/profile")
+    public UserDto updateProfile(@AuthenticationPrincipal Jwt jwt, @RequestBody UserProfileUpdateRequest updateRequest ) {
+        String userId = jwt.getSubject();
 
-        throw new UnsupportedOperationException();
+        User user = updateUserProfileUseCase.handle(
+                new UpdateUserProfileCommand(
+                        userId,
+                        updateRequest.displayName(),
+                        updateRequest.avatarUrl(),
+                        updateRequest.timezone()));
+
+
+
+        return toUserDto(user);
+    }
+
+    @PatchMapping("/home-location")
+    public UserDto updateHomeLocation(@AuthenticationPrincipal Jwt jwt, @RequestBody UserHomeLocationUpdateRequest updateRequest ) {
+        String userId = jwt.getSubject();
+
+        User user = updateHomeLocationUseCase.handle(
+                new UpdateHomeLocationCommand(
+                        userId,
+                        updateRequest.address()));
+
+
+        return toUserDto(user);
     }
 
     UserDto toUserDto(User user) {

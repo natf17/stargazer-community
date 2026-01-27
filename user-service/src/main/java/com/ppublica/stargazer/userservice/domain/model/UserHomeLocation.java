@@ -30,6 +30,18 @@ public class UserHomeLocation {
         return this.canonicalAddress;
     }
 
+    void latitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    void longitude(double longitude) {
+        this.longitude = latitude;
+    }
+
+    void address(String canonicalAddress) {
+        this.canonicalAddress = canonicalAddress;
+    }
+
 
 }
 

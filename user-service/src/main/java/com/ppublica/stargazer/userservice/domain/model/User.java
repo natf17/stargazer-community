@@ -37,8 +37,20 @@ public class User {
         this.profile.updatedAt(deregisteredAt);
     }
 
-    public void updatedAt(Instant updatedAt) {
-        this.profile.updatedAt(updatedAt);
+    public void update(UserProfileUpdate profileUpdate) {
+        this.profile.displayName(profileUpdate.displayName());
+        this.profile.avatarUrl(profileUpdate.avatarUrl());
+        this.profile.timezone(profileUpdate.timezone());
+        this.profile.updatedAt(profileUpdate.updatedAt());
     }
+
+    public void update(UserHomeLocationUpdate homeLocationUpdate) {
+        this.homeLocation.latitude(homeLocationUpdate.latitude());
+        this.homeLocation.longitude(homeLocationUpdate.longitude());
+        this.homeLocation.address(homeLocationUpdate.canonicalAddress());
+    }
+
+
+
 
 }
