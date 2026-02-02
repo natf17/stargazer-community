@@ -27,14 +27,13 @@ public class CreateSpotHandler implements CreateSpotUseCase {
     @Override
     public Spot handle(CreateSpotCommand createSpotCommand) {
 
-        Optional<Spot> spotOpt = spotRepository.findByLocation(
-                Location.create(createSpotCommand.latitude(), createSpotCommand.longitude()));
+        Optional<Spot> spotOpt = spotRepository.findByLocation(createSpotCommand.location());
 
         spotOpt.ifPresent(spot -> {
             throw new SpotAlreadyExistsException();
         });
 
-        Spot spot = Spot.create(Location.create(createSpotCommand.latitude(), createSpotCommand.longitude()));
+        Spot spot = Spot.create(createSpotCommand.location());
 
         ElevationData elevation = elevationEnrichmentPort.fetchElevation(spot.location());
 

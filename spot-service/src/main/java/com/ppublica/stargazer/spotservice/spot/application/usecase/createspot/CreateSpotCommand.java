@@ -1,3 +1,5 @@
 package com.ppublica.stargazer.spotservice.spot.application.usecase.createspot;
 
-public record CreateSpotCommand(double latitude, double longitude) { }
+import com.ppublica.stargazer.spotservice.spot.domain.model.Location;
+
+public record CreateSpotCommand(Location location) { }

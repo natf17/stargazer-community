@@ -9,11 +9,11 @@ public class Location {
         this.longitude = longitude;
     }
 
-    double latitude() {
+    public double latitude() {
         return this.latitude;
     }
 
-    double longitude() {
+    public double longitude() {
         return this.longitude;
     }
 
