@@ -12,6 +12,6 @@ public interface SpotRepository {
     List<Spot> findAllPublished();
     List<Spot> findByIds(List<SpotId> spotIds);
     Optional<Spot> findByLocation(Location location);
-    Optional<Spot> findById();
+    Optional<Spot> findById(SpotId spotId);
     Spot save(Spot newSpot);
 }
