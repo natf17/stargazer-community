@@ -11,5 +11,7 @@ The application uses a microservice architecture and is built with Spring Cloud.
 
 ...and the application services:
 - User service: manages registered users (home location, profile information, ...)
-- Spot service: controls spots (coordinates and other metadata), both public and private
-- Spot personalization service: provides user-specific spot personalizations (description, name, viewing logs)
+- Spot service: controls spots (coordinates, elevation, light pollution, ...)
+- Spot metadata service: stores verified user-provided metadata for spots (name, description, amenities, accessibility, horizon profile, terrain type, ...)
+- Spot metadata draft service: stores user-provided spot information that needs to be verified
+- Spot personalization service: provides user-specific spot personalizations (description, name, viewing logs) and orchestrates the user-facing spot view
