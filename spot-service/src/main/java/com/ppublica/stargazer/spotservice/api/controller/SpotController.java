@@ -3,6 +3,7 @@ package com.ppublica.stargazer.spotservice.api.controller;
 import com.ppublica.stargazer.spotservice.api.dto.Coordinates;
 import com.ppublica.stargazer.spotservice.api.dto.CreateSpotRequest;
 import com.ppublica.stargazer.spotservice.api.dto.SpotDto;
+import com.ppublica.stargazer.spotservice.api.mapper.SpotMapper;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.createspot.CreateSpotCommand;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.createspot.CreateSpotUseCase;
 import com.ppublica.stargazer.spotservice.spot.domain.model.Location;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpotController {
 
     private final CreateSpotUseCase createSpotUseCase;
+    private final SpotMapper spotMapper = new SpotMapper();
 
     public SpotController(CreateSpotUseCase createSpotUseCase) {
         this.createSpotUseCase = createSpotUseCase;
@@ -30,18 +32,8 @@ public class SpotController {
 
         Spot newSpot = createSpotUseCase.handle(createSpotCommand);
 
-        return toSpotDto(newSpot);
+        return spotMapper.toSpotDto(newSpot);
 
-    }
-
-
-    SpotDto toSpotDto(Spot spot) {
-        return new SpotDto(
-                spot.id().value(),
-                new Coordinates(spot.location().latitude(), spot.location().longitude()),
-                spot.elevation().meters(),
-                spot.lightPollutionRating().bortleClass().name()
-                );
     }
 
 
