@@ -1,19 +1,22 @@
 package com.ppublica.stargazer.spotservice.spot.domain.model;
 
+import com.ppublica.stargazer.sharedkernelspot.SpotId;
+
 public class Spot {
+    private final SpotId spotId;
     private final Location location;
     private Elevation elevation;
     private Visibility visibility;
     private LightPollutionRating lightPollutionRating;
 
-    private Spot(Location location, Visibility visibility) {
+    private Spot(SpotId spotId, Location location, Visibility visibility) {
+        this.spotId = spotId;
         this.location = location;
         this.visibility = visibility;
     }
 
-
     public static Spot create(Location location) {
-        return new Spot(location, Visibility.PRIVATE);
+        return new Spot(SpotId.newId(), location, Visibility.PRIVATE);
     }
 
     public Location location() {
@@ -38,6 +41,10 @@ public class Spot {
 
     public void updateLightPollutionRating(LightPollutionRatingUpdate lightPollutionRatingUpdate) {
         this.lightPollutionRating = LightPollutionRating.create(lightPollutionRatingUpdate.bortleClass(), lightPollutionRatingUpdate.src());
+    }
+
+    public SpotId id() {
+        return spotId;
     }
 
     public void makePublic() {

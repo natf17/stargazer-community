@@ -38,7 +38,7 @@ public class CreateSpotHandler implements CreateSpotUseCase {
 
         ElevationData elevation = elevationEnrichmentPort.fetchElevation(spot.location());
 
-        spot.updateElevation(new ElevationUpdate(elevation.elevationMeters(), elevation.));
+        spot.updateElevation(new ElevationUpdate(elevation.elevationMeters(), elevation.src()));
 
 
         // light pollution rating might be unavailable...
