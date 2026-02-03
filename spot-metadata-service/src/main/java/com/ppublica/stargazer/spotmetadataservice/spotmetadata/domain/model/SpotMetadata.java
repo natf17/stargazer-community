@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class SpotMetadata {
     private final SpotMetadataId id;
-    private Set<AccessPolicy> accessPolicy;
+    private Set<AccessPolicy> accessPolicies;
     private Set<Accessibility> accessibility;
     private Set<Amenity> amenities;
     private Optional<TerrainInclination> terrainInclination;
@@ -24,7 +24,7 @@ public class SpotMetadata {
     private SpotMetadata(SpotMetadataId id, SpotId spotId) {
         this.id = id;
         this.spotId = spotId;
-        this.accessPolicy = new HashSet<>();
+        this.accessPolicies = new HashSet<>();
         this.accessibility = new HashSet<>();
         this.amenities = new HashSet<>();
         this.terrainInclination = Optional.empty();
@@ -49,16 +49,16 @@ public class SpotMetadata {
         return this.spotId;
     }
 
-    public Set<AccessPolicy> accessPolicy() {
-        return Collections.unmodifiableSet(this.accessPolicy);
+    public Set<AccessPolicy> accessPolicies() {
+        return Collections.unmodifiableSet(this.accessPolicies);
     }
 
     public void addAccessPolicy(AccessPolicy accessPolicy) {
-        this.accessPolicy.add(accessPolicy);
+        this.accessPolicies.add(accessPolicy);
     }
 
     public void removeAccessPolicy(AccessPolicy accessPolicy) {
-        this.accessPolicy.remove(accessPolicy);
+        this.accessPolicies.remove(accessPolicy);
     }
 
     public Set<Accessibility> accessibility() {
