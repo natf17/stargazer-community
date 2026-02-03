@@ -5,7 +5,9 @@ import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.Amen
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.repository.SpotMetadataRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddAmenityHandler implements AddAmenityUseCase {
 
     private final SpotMetadataRepository spotMetadataRepository;
