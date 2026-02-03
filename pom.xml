@@ -18,6 +18,7 @@
         <module>gateway-service</module>
         <module>user-service</module>
         <module>spot-service</module>
+        <module>spot-metadata-service</module>
     </modules>
 
     <dependencyManagement>
