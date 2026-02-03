@@ -1,21 +1,21 @@
-package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccesspolicy;
+package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.removeaccesspolicy;
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataNotFoundException;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccesspolicy.AddAccessPolicyCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.AccessPolicy;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.repository.SpotMetadataRepository;
-import org.springframework.stereotype.Component;
 
-@Component
-public class AddAccessPolicyHandler implements  AddAccessPolicyUseCase {
+public class RemoveAccessPolicyHandler implements RemoveAccessPolicyUseCase {
     private final SpotMetadataRepository spotMetadataRepository;
 
-    public AddAccessPolicyHandler(SpotMetadataRepository spotMetadataRepository) {
+    public RemoveAccessPolicyHandler(SpotMetadataRepository spotMetadataRepository) {
         this.spotMetadataRepository = spotMetadataRepository;
     }
+
     @Override
-    public void handle(AddAccessPolicyCommand command) {
+    public void handle(RemoveAccessPolicyCommand command) {
         SpotMetadataId id = command.id();
 
         SpotMetadata spotMetadata = spotMetadataRepository.findById(id)
@@ -23,9 +23,10 @@ public class AddAccessPolicyHandler implements  AddAccessPolicyUseCase {
 
         AccessPolicy accessPolicy = AccessPolicy.valueOf(command.accessPolicy());
 
-        spotMetadata.addAccessPolicy(accessPolicy);
+        spotMetadata.removeAccessPolicy(accessPolicy);
 
         spotMetadataRepository.save(spotMetadata);
 
     }
+
 }
