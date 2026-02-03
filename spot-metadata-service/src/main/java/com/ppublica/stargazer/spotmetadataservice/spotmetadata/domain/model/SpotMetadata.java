@@ -87,12 +87,20 @@ public class SpotMetadata {
         this.terrainInclination = Optional.of(terrainInclination);
     }
 
+    public void clearTerrainInclination() {
+        this.terrainInclination = Optional.empty();
+    }
+
     public Optional<GroundSurfaceType> groundSurfaceType() {
         return this.groundSurfaceType;
     }
 
     public void groundSurfaceType(GroundSurfaceType groundSurfaceType) {
         this.groundSurfaceType = Optional.of(groundSurfaceType);
+    }
+
+    public void clearGroundSurfaceType() {
+        this.groundSurfaceType = Optional.empty();
     }
 
     public Optional<SkyVisibilityBucket> skyVisibilityBucket() {
@@ -103,12 +111,20 @@ public class SpotMetadata {
         this.skyVisibilityBucket = Optional.of(skyVisibilityBucket);
     }
 
+    public void clearSkyVisibilityBucket() {
+        this.skyVisibilityBucket = Optional.empty();
+    }
+
     public Optional<VisibilityCeiling> visibilityCeiling() {
         return this.visibilityCeiling;
     }
 
     public void visibilityCeiling(VisibilityCeiling visibilityCeiling) {
         this.visibilityCeiling = Optional.of(visibilityCeiling);
+    }
+
+    public void clearVisibilityCeiling() {
+        this.visibilityCeiling = Optional.empty();
     }
 
     public Optional<GlobalHorizonVisibility> globalHorizonVisibility() {
@@ -119,12 +135,20 @@ public class SpotMetadata {
         this.globalHorizonVisibility = Optional.of(globalHorizonVisibility);
     }
 
+    public void clearGlobalHorizonVisibility() {
+        this.globalHorizonVisibility = Optional.empty();
+    }
+
     public Optional<BestHorizonDirection> bestHorizonDirection() {
         return this.bestHorizonDirection;
     }
 
     public void bestHorizonDirection(BestHorizonDirection bestHorizonDirection) {
         this.bestHorizonDirection = Optional.of(bestHorizonDirection);
+    }
+
+    public void clearBestHorizonDirection() {
+        this.bestHorizonDirection = Optional.empty();
     }
 
 }
