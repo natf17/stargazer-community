@@ -35,6 +35,12 @@ public class SpotMetadata {
         this.bestHorizonDirection = Optional.empty();
     }
 
+    public static SpotMetadata create(SpotId spotId) {
+        return new SpotMetadata(SpotMetadataId.newId(), spotId);
+    }
+
+    // fromPersistence(SpotMetadataSnapshot) to be called by repository
+
     public SpotMetadataId id() {
         return this.id;
     }
