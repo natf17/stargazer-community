@@ -2,10 +2,12 @@ package com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.repositor
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 
 import java.util.Optional;
 
 public interface SpotMetadataRepository {
     Optional<SpotMetadata> findBySpotId(SpotId spotId);
+    Optional<SpotMetadata> findById(SpotMetadataId id);
     SpotMetadata save(SpotMetadata spotMetadata);
 }
