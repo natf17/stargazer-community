@@ -1,4 +1,4 @@
-package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.setname;
+package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.updatename;
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataNotFoundException;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.CanonicalName;
@@ -6,15 +6,15 @@ import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.Spot
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.repository.SpotMetadataRepository;
 
-public class SetNameHandler implements SetNameUseCase {
+public class UpdateNameHandler implements UpdateNameUseCase {
     private final SpotMetadataRepository spotMetadataRepository;
 
-    public SetNameHandler(SpotMetadataRepository spotMetadataRepository) {
+    public UpdateNameHandler(SpotMetadataRepository spotMetadataRepository) {
         this.spotMetadataRepository = spotMetadataRepository;
     }
 
     @Override
-    public void handle(SetNameCommand command) {
+    public void handle(UpdateNameCommand command) {
         SpotMetadataId id = command.id();
 
         SpotMetadata spotMetadata = spotMetadataRepository.findById(id)
