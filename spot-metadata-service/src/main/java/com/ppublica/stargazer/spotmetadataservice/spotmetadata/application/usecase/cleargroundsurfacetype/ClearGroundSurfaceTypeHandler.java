@@ -19,7 +19,7 @@ public class ClearGroundSurfaceTypeHandler implements ClearGroundSurfaceTypeUseC
         SpotMetadata spotMetadata = spotMetadataRepository.findById(id)
                 .orElseThrow(SpotMetadataNotFoundException::new);
 
-        spotMetadata.clearSkyVisibilityBucket();
+        spotMetadata.clearGroundSurfaceType();
 
         spotMetadataRepository.save(spotMetadata);
     }
