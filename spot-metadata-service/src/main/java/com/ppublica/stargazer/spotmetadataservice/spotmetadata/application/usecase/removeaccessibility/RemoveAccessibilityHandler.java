@@ -1,7 +1,6 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.removeaccessibility;
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataNotFoundException;
-import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccessibility.AddAccessibilityCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.Accessibility;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;

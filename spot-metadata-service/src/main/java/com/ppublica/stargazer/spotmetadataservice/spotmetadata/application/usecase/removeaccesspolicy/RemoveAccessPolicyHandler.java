@@ -1,7 +1,6 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.removeaccesspolicy;
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataNotFoundException;
-import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccesspolicy.AddAccessPolicyCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.AccessPolicy;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
