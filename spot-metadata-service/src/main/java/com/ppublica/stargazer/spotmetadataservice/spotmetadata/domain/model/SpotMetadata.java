@@ -69,7 +69,7 @@ public class SpotMetadata {
         this.accessibilities.add(accessibility);
     }
 
-    public void removeAccessibilityType(Accessibility accessibility) {
+    public void removeAccessibility(Accessibility accessibility) {
         this.accessibilities.remove(accessibility);
     }
 

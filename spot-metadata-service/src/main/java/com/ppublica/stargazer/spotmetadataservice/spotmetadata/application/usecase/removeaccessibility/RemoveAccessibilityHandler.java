@@ -23,7 +23,7 @@ public class RemoveAccessibilityHandler implements RemoveAccessibilityUseCase {
 
         Accessibility accessibility = Accessibility.valueOf(command.accessibility());
 
-        spotMetadata.removeAccessibilityType(accessibility);
+        spotMetadata.removeAccessibility(accessibility);
 
         spotMetadataRepository.save(spotMetadata);
     }
