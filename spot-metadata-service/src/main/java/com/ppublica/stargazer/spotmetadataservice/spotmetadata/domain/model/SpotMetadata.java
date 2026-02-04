@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class SpotMetadata {
     private final SpotMetadataId id;
+    private Optional<CanonicalDescription> description;
+    private CanonicalName name;
     private Set<AccessPolicy> accessPolicies;
     private Set<Accessibility> accessibilities;
     private Set<Amenity> amenities;
@@ -21,9 +23,11 @@ public class SpotMetadata {
     private final SpotId spotId;
 
 
-    private SpotMetadata(SpotMetadataId id, SpotId spotId) {
+    private SpotMetadata(SpotMetadataId id, SpotId spotId, CanonicalName name) {
         this.id = id;
         this.spotId = spotId;
+        this.name = name;
+        this.description = Optional.empty();
         this.accessPolicies = new HashSet<>();
         this.accessibilities = new HashSet<>();
         this.amenities = new HashSet<>();
@@ -35,8 +39,8 @@ public class SpotMetadata {
         this.bestHorizonDirection = Optional.empty();
     }
 
-    public static SpotMetadata create(SpotId spotId) {
-        return new SpotMetadata(SpotMetadataId.newId(), spotId);
+    public static SpotMetadata create(SpotId spotId, CanonicalName name) {
+        return new SpotMetadata(SpotMetadataId.newId(), spotId, name);
     }
 
     // fromPersistence(SpotMetadataSnapshot) to be called by repository
@@ -47,6 +51,26 @@ public class SpotMetadata {
 
     public SpotId spotId() {
         return this.spotId;
+    }
+
+    public CanonicalName name() {
+        return this.name;
+    }
+
+    public void setName(CanonicalName name) {
+        this.name = name;
+    }
+
+    public Optional<CanonicalDescription> description() {
+        return this.description;
+    }
+
+    public void description(CanonicalDescription description) {
+        this.description = Optional.of(description);
+    }
+
+    public void clearDescription() {
+        this.description = Optional.empty();
     }
 
     public Set<AccessPolicy> accessPolicies() {

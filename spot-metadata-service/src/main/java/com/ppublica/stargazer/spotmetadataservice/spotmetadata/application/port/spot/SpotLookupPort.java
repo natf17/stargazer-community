@@ -2,6 +2,8 @@ package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 
+import java.util.Optional;
+
 public interface SpotLookupPort {
-    boolean spotExists(SpotId spotId);
+    Optional<SpotLocationDto> fetchLocation(SpotId spotId);
 }

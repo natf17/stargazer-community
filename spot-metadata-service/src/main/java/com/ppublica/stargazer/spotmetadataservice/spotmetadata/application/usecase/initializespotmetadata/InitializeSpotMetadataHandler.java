@@ -3,7 +3,10 @@ package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usec
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataAlreadyExistsException;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotNotFoundException;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port.spot.SpotLocationDto;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port.spot.SpotLookupPort;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.CanonicalName;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.Coordinates;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.repository.SpotMetadataRepository;
 import org.springframework.stereotype.Component;
@@ -23,18 +26,21 @@ public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseC
     public SpotMetadata handle(InitializeSpotMetadataCommand command) {
         SpotId spotId = command.spotId();
 
-        boolean doesSpotExist = spotLookupPort.spotExists(spotId);
+        SpotLocationDto spotLocationDto = spotLookupPort.fetchLocation(spotId)
+                .orElseThrow(SpotNotFoundException::new);
 
-        if(!doesSpotExist) {
-            throw new SpotNotFoundException();
-        }
 
         spotMetadataRepository.findBySpotId(spotId)
                 .ifPresent(spot -> {
                     throw new SpotMetadataAlreadyExistsException();
                 });
 
-        SpotMetadata spotMetadata = SpotMetadata.create(spotId);
+        Coordinates coordinates = Coordinates.create(
+                spotLocationDto.coordinates().latitude(), spotLocationDto.coordinates().longitude());
+
+        CanonicalName fallbackName = CanonicalName.createFallback(coordinates);
+
+        SpotMetadata spotMetadata = SpotMetadata.create(spotId, fallbackName);
 
         return spotMetadataRepository.save(spotMetadata);
 
