@@ -44,6 +44,7 @@ import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.useca
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.setvisibilityceiling.SetVisibilityCeilingUseCase;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.updatename.UpdateNameCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.updatename.UpdateNameUseCase;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -121,8 +122,8 @@ public class SpotMetadataApplicationService {
 
     }
 
-    public void initializeSpotMetadata(InitializeSpotMetadataCommand command) {
-        this.initializeSpotMetadataUseCase.handle(command);
+    public SpotMetadata initializeSpotMetadata(InitializeSpotMetadataCommand command) {
+        return this.initializeSpotMetadataUseCase.handle(command);
     }
 
     public void addAccessibility(AddAccessibilityCommand command) {

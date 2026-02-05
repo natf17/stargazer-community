@@ -2,4 +2,4 @@ package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usec
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 
-public record InitializeSpotMetadataCommand(SpotId spotId) { }
+public record InitializeSpotMetadataCommand(SpotId spotId, String canonicalName) { }

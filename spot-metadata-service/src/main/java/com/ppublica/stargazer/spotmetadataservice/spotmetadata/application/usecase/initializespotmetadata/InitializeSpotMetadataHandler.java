@@ -25,6 +25,7 @@ public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseC
     @Override
     public SpotMetadata handle(InitializeSpotMetadataCommand command) {
         SpotId spotId = command.spotId();
+        String canonicalNameReceived = command.canonicalName();
 
         SpotLocationDto spotLocationDto = spotLookupPort.fetchLocation(spotId)
                 .orElseThrow(SpotNotFoundException::new);
@@ -35,15 +36,22 @@ public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseC
                     throw new SpotMetadataAlreadyExistsException();
                 });
 
-        Coordinates coordinates = Coordinates.create(
-                spotLocationDto.coordinates().latitude(), spotLocationDto.coordinates().longitude());
 
-        CanonicalName fallbackName = CanonicalName.createFallback(coordinates);
+        CanonicalName canonicalName = canonicalNameReceived == null || canonicalNameReceived.isEmpty() ?
+                createFallBackCanonicalName(spotLocationDto) : CanonicalName.create(canonicalNameReceived);
 
-        SpotMetadata spotMetadata = SpotMetadata.create(spotId, fallbackName);
+        SpotMetadata spotMetadata = SpotMetadata.create(spotId, canonicalName);
 
         return spotMetadataRepository.save(spotMetadata);
 
 
     }
+
+    CanonicalName createFallBackCanonicalName(SpotLocationDto spotLocationDto) {
+        Coordinates coordinates = Coordinates.create(
+                spotLocationDto.coordinates().latitude(), spotLocationDto.coordinates().longitude());
+
+        return CanonicalName.createFallback(coordinates);
+    }
+
 }
