@@ -2,4 +2,4 @@ package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usec
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 
-public record ClearTerrainInclinationCommand(SpotMetadataId id, String terrainInclination) {}
+public record ClearTerrainInclinationCommand(SpotMetadataId id) {}
