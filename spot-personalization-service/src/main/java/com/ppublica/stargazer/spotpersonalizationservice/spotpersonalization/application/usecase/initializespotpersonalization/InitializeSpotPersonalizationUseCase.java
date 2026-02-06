@@ -2,6 +2,6 @@ package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.ap
 
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalization;
 
-public interface InitializeSpotMetadataUseCase {
-    SpotPersonalization handle(InitializeSpotMetadataCommand command);
+public interface InitializeSpotPersonalizationUseCase {
+    SpotPersonalization handle(InitializeSpotPersonalizationCommand command);
 }

@@ -13,22 +13,22 @@ import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.dom
 import org.springframework.stereotype.Component;
 
 @Component
-public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseCase {
+public class InitializeSpotPersonalizationHandler implements InitializeSpotPersonalizationUseCase {
 
     private final SpotPersonalizationRepository repository;
     private final UserLookupPort userLookupPort;
     private final SpotLookupPort spotLookupPort;
 
-    public InitializeSpotMetadataHandler(SpotPersonalizationRepository spotPersonalizationRepository,
-                                         UserLookupPort userLookupPort,
-                                         SpotLookupPort spotLookupPort) {
+    public InitializeSpotPersonalizationHandler(SpotPersonalizationRepository spotPersonalizationRepository,
+                                                UserLookupPort userLookupPort,
+                                                SpotLookupPort spotLookupPort) {
         this.repository = spotPersonalizationRepository;
         this.userLookupPort = userLookupPort;
         this.spotLookupPort = spotLookupPort;
     }
 
     @Override
-    public SpotPersonalization handle(InitializeSpotMetadataCommand command) {
+    public SpotPersonalization handle(InitializeSpotPersonalizationCommand command) {
         SpotId spotId = command.spotId();
         UserId userId = command.userId();
         String name = command.name();

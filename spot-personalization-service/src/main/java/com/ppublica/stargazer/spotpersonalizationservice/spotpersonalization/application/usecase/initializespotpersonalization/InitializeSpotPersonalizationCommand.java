@@ -3,4 +3,4 @@ package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.ap
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.sharedkerneluser.UserId;
 
-public record InitializeSpotMetadataCommand(SpotId spotId, UserId userId, String name) { }
+public record InitializeSpotPersonalizationCommand(SpotId spotId, UserId userId, String name) { }
