@@ -12,6 +12,7 @@
 
     <modules>
         <module>shared-kernel-spot</module>
+        <module>shared-kernel-user</module>
         <module>config-server</module>
         <module>stargazer-test-service</module>
         <module>discovery-server</module>
@@ -19,6 +20,7 @@
         <module>user-service</module>
         <module>spot-service</module>
         <module>spot-metadata-service</module>
+        <module>spot-personalization-service</module>
     </modules>
 
     <dependencyManagement>
