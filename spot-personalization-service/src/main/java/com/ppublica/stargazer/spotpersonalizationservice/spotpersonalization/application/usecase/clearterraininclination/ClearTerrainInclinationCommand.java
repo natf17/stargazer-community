@@ -1,0 +1,5 @@
+package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.clearterraininclination;
+
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalizationId;
+
+public record ClearTerrainInclinationCommand(SpotPersonalizationId id) {}

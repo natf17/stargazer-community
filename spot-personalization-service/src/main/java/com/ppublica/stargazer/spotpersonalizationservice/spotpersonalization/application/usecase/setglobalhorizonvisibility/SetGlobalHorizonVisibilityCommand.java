@@ -1,0 +1,5 @@
+package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.setglobalhorizonvisibility;
+
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalizationId;
+
+public record SetGlobalHorizonVisibilityCommand(SpotPersonalizationId id, String globalHorizonVisibility) { }

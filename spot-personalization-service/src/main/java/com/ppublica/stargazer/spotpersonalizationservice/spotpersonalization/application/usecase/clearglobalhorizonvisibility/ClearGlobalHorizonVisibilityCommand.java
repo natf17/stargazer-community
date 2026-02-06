@@ -1,0 +1,5 @@
+package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.clearglobalhorizonvisibility;
+
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalizationId;
+
+public record ClearGlobalHorizonVisibilityCommand(SpotPersonalizationId id) { }
