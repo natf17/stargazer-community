@@ -3,15 +3,15 @@ package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.ap
 import java.util.Set;
 
 public record SpotPersonalizationView(
-        String description,
         String name,
+        String description,
         Set<String> accessPolicies,
         Set<String> accessibilities,
         Set<String> amenities,
         String terrainInclination,
         String groundSurfaceType,
         String skyVisibilityBucket,
-        String visibilityCeiling,
+        double visibilityCeiling,
         String globalHorizonVisibility,
         String bestHorizonDirection
 ) { }
