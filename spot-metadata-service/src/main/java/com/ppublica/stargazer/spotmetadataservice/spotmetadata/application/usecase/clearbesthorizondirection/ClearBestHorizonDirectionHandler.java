@@ -1,7 +1,6 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.clearbesthorizondirection;
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataNotFoundException;
-import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.clearglobalhorizonvisibility.ClearGlobalHorizonVisibilityCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.repository.SpotMetadataRepository;

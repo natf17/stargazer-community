@@ -1,7 +1,7 @@
 package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.mapper;
 
-import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.Spot;
-import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.SpotMetadata;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.spot.Spot;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.spotmetadata.SpotMetadata;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.SpotViewListResponse;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalization;
 

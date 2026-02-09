@@ -1,4 +1,4 @@
-package com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model;
+package com.ppublica.stargazer.sharedkernelspotmetadata;
 
 import com.github.f4b6a3.ulid.Ulid;
 import com.github.f4b6a3.ulid.UlidCreator;

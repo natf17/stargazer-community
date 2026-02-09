@@ -1,6 +1,7 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model;
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
+import com.ppublica.stargazer.sharedkernelspotmetadata.SpotMetadataId;
 
 import java.util.Collections;
 import java.util.HashSet;

@@ -7,7 +7,7 @@ import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.app
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.getspotviewusecase.GetSpotViewQuery;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.getspotviewusecase.GetSpotViewUseCase;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.SpotViewListResponse;
-import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.getspotviewusecase.SpotViewResponse;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.SpotViewResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;

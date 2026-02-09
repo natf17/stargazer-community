@@ -2,8 +2,8 @@ package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.ap
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.sharedkerneluser.UserId;
-import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.Spot;
-import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.SpotMetadata;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.spot.Spot;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.domain.spotmetadata.SpotMetadata;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.exception.UserNotFoundException;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.mapper.SpotMetadataPortMapper;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.mapper.SpotPersonalizationMapper;
@@ -51,7 +51,9 @@ public class GetAllMySpotViewsHandler implements GetAllMySpotViewsUseCase {
 
         List<SpotPersonalization> spotPersonalizations = repository.findByUserId(userId);
 
-        List<SpotId> spotIds = spotPersonalizations.stream().map(SpotPersonalization::spotId).toList();
+        List<SpotId> spotIds = spotPersonalizations.stream()
+                .map(SpotPersonalization::spotId)
+                .toList();
 
         List<SpotPortDto> spotsFound = spotLookupPort.loadSpots(spotIds);
         List<Spot> spots = spotsFound.stream()

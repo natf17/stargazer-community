@@ -13,6 +13,7 @@
     <modules>
         <module>shared-kernel-spot</module>
         <module>shared-kernel-user</module>
+        <module>shared-kernel-spotmetadata</module>
         <module>config-server</module>
         <module>stargazer-test-service</module>
         <module>discovery-server</module>

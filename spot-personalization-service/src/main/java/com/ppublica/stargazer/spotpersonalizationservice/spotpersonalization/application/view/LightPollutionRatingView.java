@@ -1,5 +1,3 @@
 package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view;
 
-import java.util.List;
-
-public record SpotViewListResponse(List<SpotViewResponse> spots) { }
+public record LightPollutionRatingView(double bortleClass, String src) { }
