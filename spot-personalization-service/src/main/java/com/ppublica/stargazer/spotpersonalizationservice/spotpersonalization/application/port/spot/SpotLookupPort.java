@@ -2,6 +2,9 @@ package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.ap
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 
+import java.util.List;
+
 public interface SpotLookupPort {
     boolean doesSpotExist(SpotId spotId);
+    List<SpotPortDto> loadSpots(List<SpotId> spotIds);
 }
