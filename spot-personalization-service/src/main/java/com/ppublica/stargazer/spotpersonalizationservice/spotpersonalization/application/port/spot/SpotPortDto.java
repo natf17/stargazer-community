@@ -1,3 +1,5 @@
 package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.port.spot;
 
-public record SpotPortDto() { }
+import com.ppublica.stargazer.sharedkernelspot.SpotId;
+
+public record SpotPortDto(SpotId spotId) {}

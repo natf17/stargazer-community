@@ -2,4 +2,4 @@ package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.ap
 
 import java.util.Optional;
 
-public record GetAllSpotViewsQuery(Optional<String> userid) {}
+public record GetAllSpotViewsQuery(Optional<String> userId) {}
