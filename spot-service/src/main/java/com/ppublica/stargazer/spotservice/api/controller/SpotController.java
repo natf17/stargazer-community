@@ -1,12 +1,13 @@
 package com.ppublica.stargazer.spotservice.api.controller;
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
-import com.ppublica.stargazer.spotservice.api.dto.Coordinates;
 import com.ppublica.stargazer.spotservice.api.dto.CreateSpotRequest;
 import com.ppublica.stargazer.spotservice.api.dto.SpotDto;
 import com.ppublica.stargazer.spotservice.api.mapper.SpotMapper;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.createspot.CreateSpotCommand;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.createspot.CreateSpotUseCase;
+import com.ppublica.stargazer.spotservice.spot.application.usecase.getspotbyid.GetSpotByIdQuery;
+import com.ppublica.stargazer.spotservice.spot.application.usecase.getspotbyid.GetSpotByIdUseCase;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.publishspot.PublishSpotCommand;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.publishspot.PublishSpotUseCase;
 import com.ppublica.stargazer.spotservice.spot.domain.model.Location;
@@ -20,11 +21,15 @@ public class SpotController {
 
     private final CreateSpotUseCase createSpotUseCase;
     private final PublishSpotUseCase publishSpotUseCase;
+    private final GetSpotByIdUseCase getSpotByIdUseCase;
     private final SpotMapper spotMapper = new SpotMapper();
 
-    public SpotController(CreateSpotUseCase createSpotUseCase, PublishSpotUseCase publishSpotUseCase) {
+    public SpotController(CreateSpotUseCase createSpotUseCase,
+                          PublishSpotUseCase publishSpotUseCase,
+                          GetSpotByIdUseCase getSpotByIdUseCase) {
         this.createSpotUseCase = createSpotUseCase;
         this.publishSpotUseCase = publishSpotUseCase;
+        this.getSpotByIdUseCase = getSpotByIdUseCase;
     }
 
     @PostMapping()
@@ -46,6 +51,11 @@ public class SpotController {
 
         publishSpotUseCase.handle(new PublishSpotCommand(spotId));
 
+    }
+
+    @GetMapping("/{id}")
+    public SpotDto getSpot(@PathVariable String id) {
+        return spotMapper.toSpotDto(getSpotByIdUseCase.execute(new GetSpotByIdQuery(id)));
     }
 
 
