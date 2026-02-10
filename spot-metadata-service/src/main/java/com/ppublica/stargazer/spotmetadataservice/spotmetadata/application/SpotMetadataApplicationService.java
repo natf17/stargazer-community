@@ -1,5 +1,6 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application;
 
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.dto.SpotMetadataView;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccessibility.AddAccessibilityCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccessibility.AddAccessibilityUseCase;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccesspolicy.AddAccessPolicyCommand;
@@ -122,7 +123,7 @@ public class SpotMetadataApplicationService {
 
     }
 
-    public SpotMetadata initializeSpotMetadata(InitializeSpotMetadataCommand command) {
+    public SpotMetadataView initializeSpotMetadata(InitializeSpotMetadataCommand command) {
         return this.initializeSpotMetadataUseCase.handle(command);
     }
 

@@ -4,8 +4,8 @@ import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.sharedkernelspotmetadata.SpotMetadataId;
 import com.ppublica.stargazer.spotmetadataservice.api.dto.InitializeSpotMetadataRequest;
 import com.ppublica.stargazer.spotmetadataservice.api.dto.SingleValueRequest;
-import com.ppublica.stargazer.spotmetadataservice.api.dto.SpotMetadataDto;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.SpotMetadataApplicationService;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.dto.SpotMetadataView;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccessibility.AddAccessibilityCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addaccesspolicy.AddAccessPolicyCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.addamenity.AddAmenityCommand;
@@ -28,7 +28,6 @@ import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.useca
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.setterraininclination.SetTerrainInclinationCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.setvisibilityceiling.SetVisibilityCeilingCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.updatename.UpdateNameCommand;
-import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,14 +42,12 @@ public class SpotMetadataController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SpotMetadataDto initializeSpotMetadata(@RequestBody InitializeSpotMetadataRequest request) {
+    public SpotMetadataView initializeSpotMetadata(@RequestBody InitializeSpotMetadataRequest request) {
         SpotId spotId = SpotId.of(request.spotId());
 
         InitializeSpotMetadataCommand command = new InitializeSpotMetadataCommand(spotId, request.name());
 
-        SpotMetadata spotMetadata = service.initializeSpotMetadata(command);
-
-        return toSpotMetadataDto(spotMetadata);
+        return service.initializeSpotMetadata(command);
 
     }
 
@@ -222,8 +219,5 @@ public class SpotMetadataController {
                 new UpdateNameCommand(spotMetadataId, request.value().asText()));
     }
 
-    SpotMetadataDto toSpotMetadataDto(SpotMetadata spotMetadata) {
-        return new SpotMetadataDto(spotMetadata.id().value());
-    }
 
 }

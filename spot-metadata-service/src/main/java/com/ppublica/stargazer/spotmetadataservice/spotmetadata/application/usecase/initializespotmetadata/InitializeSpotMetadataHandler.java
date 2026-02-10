@@ -1,8 +1,10 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.initializespotmetadata;
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.dto.SpotMetadataView;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotMetadataAlreadyExistsException;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.exception.SpotNotFoundException;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.mapper.SpotMetadataMapper;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port.spot.SpotLocationDto;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port.spot.SpotLookupPort;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.CanonicalName;
@@ -16,6 +18,7 @@ public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseC
 
     private final SpotMetadataRepository spotMetadataRepository;
     private final SpotLookupPort spotLookupPort;
+    private final SpotMetadataMapper mapper = new SpotMetadataMapper();
 
     public InitializeSpotMetadataHandler(SpotMetadataRepository spotMetadataRepository, SpotLookupPort spotLookupPort) {
         this.spotMetadataRepository = spotMetadataRepository;
@@ -23,7 +26,7 @@ public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseC
     }
 
     @Override
-    public SpotMetadata handle(InitializeSpotMetadataCommand command) {
+    public SpotMetadataView handle(InitializeSpotMetadataCommand command) {
         SpotId spotId = command.spotId();
         String canonicalNameReceived = command.canonicalName();
 
@@ -42,7 +45,9 @@ public class InitializeSpotMetadataHandler implements InitializeSpotMetadataUseC
 
         SpotMetadata spotMetadata = SpotMetadata.create(spotId, canonicalName);
 
-        return spotMetadataRepository.save(spotMetadata);
+        spotMetadataRepository.save(spotMetadata);
+
+        return mapper.toSpotMetadataView(spotMetadata);
 
 
     }

@@ -1,7 +1,7 @@
 package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.initializespotmetadata;
 
-import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
+import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.dto.SpotMetadataView;
 
 public interface InitializeSpotMetadataUseCase {
-    SpotMetadata handle(InitializeSpotMetadataCommand command);
+    SpotMetadataView handle(InitializeSpotMetadataCommand command);
 }
