@@ -17,7 +17,7 @@ public record SpotMetadata(
         Optional<String> terrainInclination,
         Optional<String> groundSurfaceType,
         Optional<String> skyVisibilityBucket,
-        Optional<String> visibilityCeiling,
+        Optional<Double> visibilityCeiling,
         Optional<String> globalHorizonVisibility,
         Optional<String> bestHorizonDirection
 ) { }

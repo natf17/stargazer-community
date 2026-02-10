@@ -6,9 +6,7 @@ import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.app
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.*;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalization;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SpotPersonalizationMapper {
@@ -29,30 +27,50 @@ public class SpotPersonalizationMapper {
 
     }
 
-    /*
-     * spotPersonalization can be null
-     */
     public SpotViewResponse toSpotViewResponse(Spot spot, SpotMetadata spotMetadata, SpotPersonalization spotPersonalization) {
-        SpotPersonalizationView spotPersonalizationView = spotPersonalization == null ? null : toSpotPersonalizationView(spotPersonalization);
+        String name = null;
+        String description = null;
+        Set<String> accessPolicies = new HashSet<>();
+        Set<String> accessibilities = new HashSet<>();
+        Set<String> amenities = new HashSet<>();
+        String terrainInclination = null;
+        String groundSurfaceType = null;
+        String skyVisibilityBucket = null;
+        double visibilityCeiling = -1.0;
+        String globalHorizonVisibility = null;
+        String bestHorizonDirection = null;
 
+        if(spotMetadata != null) {
+            name = spotMetadata.name();
+            description = spotMetadata.description().orElse(null);
+            accessPolicies = Set.copyOf(spotMetadata.accessPolicies());
+            accessibilities = Set.copyOf(spotMetadata.accessibilities());
+            amenities = Set.copyOf(spotMetadata.amenities());
+            terrainInclination = spotMetadata.terrainInclination().orElse(null);
+            groundSurfaceType = spotMetadata.groundSurfaceType().orElse(null);
+            skyVisibilityBucket = spotMetadata.skyVisibilityBucket().orElse(null);
+            visibilityCeiling = spotMetadata.visibilityCeiling().orElse(-1.0);
+            globalHorizonVisibility = spotMetadata.globalHorizonVisibility().orElse(null);
+            bestHorizonDirection = spotMetadata.bestHorizonDirection().orElse(null);
+        }
 
         return new SpotViewResponse(
                 spot.spotId().value(),
                 new CoordinatesView(spot.coordinates().latitude(), spot.coordinates().longitude()),
                 new ElevationView(spot.elevation().meters(), spot.elevation().src()),
                 new LightPollutionRatingView(spot.lightPollutionRating().bortleClass(),spot.lightPollutionRating().src()),
-                spotMetadata.name(),
-                spotMetadata.description().orElse(null),
-                Set.copyOf(spotMetadata.accessPolicies()),
-                Set.copyOf(spotMetadata.accessibilities()),
-                Set.copyOf(spotMetadata.amenities()),
-                spotMetadata.terrainInclination().orElse(null),
-                spotMetadata.groundSurfaceType().orElse(null),
-                spotMetadata.skyVisibilityBucket().orElse(null),
-                spotMetadata.visibilityCeiling().orElse(null),
-                spotMetadata.globalHorizonVisibility().orElse(null),
-                spotMetadata.bestHorizonDirection().orElse(null),
-                spotPersonalizationView
+                name,
+                description,
+                accessPolicies,
+                accessibilities,
+                amenities,
+                terrainInclination,
+                groundSurfaceType,
+                skyVisibilityBucket,
+                visibilityCeiling,
+                globalHorizonVisibility,
+                bestHorizonDirection,
+                spotPersonalization != null ? toSpotPersonalizationView(spotPersonalization) : null
         );
 
     }
@@ -72,5 +90,6 @@ public class SpotPersonalizationMapper {
                 spotPersonalization.bestHorizonDirection().map(Enum::name).orElse(null)
         );
     }
+
 
 }

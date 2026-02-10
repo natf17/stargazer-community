@@ -41,7 +41,7 @@ public class GetSpotViewHandler implements GetSpotViewUseCase {
     @Override
     public SpotViewResponse execute(GetSpotViewQuery query) {
         SpotId spotId = SpotId.of(query.spotId());
-        Optional<SpotPersonalization> spotPersonalization = Optional.empty();
+        SpotPersonalization spotPersonalization = null;
 
         if(query.userId().isPresent()) {
             UserId userId = UserId.of(query.userId().get());
@@ -50,7 +50,7 @@ public class GetSpotViewHandler implements GetSpotViewUseCase {
                 throw new UserNotFoundException();
             }
 
-            spotPersonalization = repository.findById(new SpotPersonalizationId(userId, spotId));
+            spotPersonalization = repository.findById(new SpotPersonalizationId(userId, spotId)).orElse(null);
 
         }
 
@@ -60,9 +60,8 @@ public class GetSpotViewHandler implements GetSpotViewUseCase {
 
 
         SpotMetadata spotMetadata = spotMetadataLookupPort.loadSpotMetadata(spotId)
-                .map(spotMetadataPortMapper::toSpotMetadata)
-                .orElse(null);
+                .map(spotMetadataPortMapper::toSpotMetadata).orElse(null);
 
-        return mapper.toSpotViewResponse(spot, spotMetadata, spotPersonalization.get());
+        return mapper.toSpotViewResponse(spot, spotMetadata, spotPersonalization);
     }
 }

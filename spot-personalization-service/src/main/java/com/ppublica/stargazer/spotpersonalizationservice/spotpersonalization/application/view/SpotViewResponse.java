@@ -1,5 +1,6 @@
 package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view;
 
+import java.util.Optional;
 import java.util.Set;
 
 public record SpotViewResponse(String spotId,
@@ -14,7 +15,7 @@ public record SpotViewResponse(String spotId,
                                String terrainInclination,
                                String groundSurfaceType,
                                String skyVisibilityBucket,
-                               String visibilityCeiling,
+                               double visibilityCeiling,
                                String globalHorizonVisibility,
                                String bestHorizonDirection,
                                SpotPersonalizationView personalization) { }
