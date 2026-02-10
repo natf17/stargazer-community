@@ -1,4 +1,4 @@
-package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.getspotmetadataviewybyspot;
+package com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.getspotmetadataviewbyspot;
 
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.dto.SpotMetadataView;
 
