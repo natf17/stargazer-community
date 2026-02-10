@@ -1,5 +1,6 @@
 package com.ppublica.stargazer.spotservice.spot.application.usecase.getspotsbyids;
 
+import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotservice.spot.domain.model.Spot;
 import com.ppublica.stargazer.spotservice.spot.domain.repository.SpotRepository;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,11 @@ public class GetSpotsByIdsHandler implements GetSpotsByIdsUseCase {
 
     @Override
     public List<Spot> handle(GetSpotsByIdsQuery query) {
+        List<SpotId> spotIds = query.ids()
+                .stream()
+                .map(SpotId::of)
+                .toList();
 
-        return repository.findByIds(query.ids());
+        return repository.findByIds(spotIds);
     }
 }

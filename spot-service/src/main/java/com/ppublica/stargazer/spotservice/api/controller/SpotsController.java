@@ -2,8 +2,8 @@ package com.ppublica.stargazer.spotservice.api.controller;
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotservice.api.dto.GetSpotsByIdsRequest;
-import com.ppublica.stargazer.spotservice.api.dto.SpotDto;
-import com.ppublica.stargazer.spotservice.api.mapper.SpotMapper;
+import com.ppublica.stargazer.spotservice.spot.application.view.SpotDto;
+import com.ppublica.stargazer.spotservice.spot.application.mapper.SpotMapper;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.browseallspotsadmin.BrowseAllSpotsAdminQuery;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.browseallspotsadmin.BrowseAllSpotsAdminUseCase;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.browsepublicspots.BrowsePublicSpotsQuery;
@@ -59,12 +59,8 @@ public class SpotsController {
 
     @PostMapping("/by-ids")
     public List<SpotDto> getSpotsByIds(@RequestBody GetSpotsByIdsRequest request) {
-        List<SpotId> spotIds = request.ids()
-                                .stream()
-                                .map(SpotId::of)
-                                .toList();
 
-        List<Spot> spots = getSpotsByIdsUseCase.handle(new GetSpotsByIdsQuery(spotIds));
+        List<Spot> spots = getSpotsByIdsUseCase.handle(new GetSpotsByIdsQuery(request.ids()));
 
         return spots.stream()
                 .map(spotMapper::toSpotDto)

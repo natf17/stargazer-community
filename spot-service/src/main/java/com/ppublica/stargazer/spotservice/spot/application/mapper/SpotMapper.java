@@ -1,7 +1,7 @@
-package com.ppublica.stargazer.spotservice.api.mapper;
+package com.ppublica.stargazer.spotservice.spot.application.mapper;
 
 import com.ppublica.stargazer.spotservice.api.dto.Coordinates;
-import com.ppublica.stargazer.spotservice.api.dto.SpotDto;
+import com.ppublica.stargazer.spotservice.spot.application.view.SpotDto;
 import com.ppublica.stargazer.spotservice.spot.domain.model.Spot;
 
 public class SpotMapper {

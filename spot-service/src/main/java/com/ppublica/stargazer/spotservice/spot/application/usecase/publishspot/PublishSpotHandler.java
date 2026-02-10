@@ -1,5 +1,6 @@
 package com.ppublica.stargazer.spotservice.spot.application.usecase.publishspot;
 
+import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotservice.spot.application.exception.SpotNotFoundException;
 import com.ppublica.stargazer.spotservice.spot.domain.model.Spot;
 import com.ppublica.stargazer.spotservice.spot.domain.repository.SpotRepository;
@@ -16,7 +17,9 @@ public class PublishSpotHandler implements PublishSpotUseCase {
 
     @Override
     public void handle(PublishSpotCommand command) {
-        Spot spot = repository.findById(command.spotId())
+        SpotId spotId = SpotId.of(command.id());
+
+        Spot spot = repository.findById(spotId)
                 .orElseThrow(SpotNotFoundException::new);
 
         spot.makePublic();
