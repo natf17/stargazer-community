@@ -79,7 +79,7 @@ public class GetAllSpotViewsHandler implements GetAllSpotViewsUseCase {
         List<SpotId> allSpotIds = Stream.concat(publicSpotIds.stream(), personalSpotIdsStillNeeded.stream())
                 .distinct()
                 .toList();
-        
+
         List<SpotMetadata> spotMetadataList = spotMetadataLookupPort.loadSpotMetadata(allSpotIds).stream()
                 .map(spotMetadataPortMapper::toSpotMetadata)
                 .toList();
