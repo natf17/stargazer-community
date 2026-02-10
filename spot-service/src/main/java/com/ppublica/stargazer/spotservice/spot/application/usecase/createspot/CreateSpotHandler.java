@@ -1,10 +1,12 @@
 package com.ppublica.stargazer.spotservice.spot.application.usecase.createspot;
 
 import com.ppublica.stargazer.spotservice.spot.application.exception.SpotAlreadyExistsException;
+import com.ppublica.stargazer.spotservice.spot.application.mapper.SpotMapper;
 import com.ppublica.stargazer.spotservice.spot.application.port.enrichment.ElevationData;
 import com.ppublica.stargazer.spotservice.spot.application.port.enrichment.ElevationEnrichmentPort;
 import com.ppublica.stargazer.spotservice.spot.application.port.enrichment.LightPollutionRatingData;
 import com.ppublica.stargazer.spotservice.spot.application.port.enrichment.LightPollutionRatingEnrichmentPort;
+import com.ppublica.stargazer.spotservice.spot.application.view.SpotDto;
 import com.ppublica.stargazer.spotservice.spot.domain.model.*;
 import com.ppublica.stargazer.spotservice.spot.domain.repository.SpotRepository;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ public class CreateSpotHandler implements CreateSpotUseCase {
     private final SpotRepository spotRepository;
     private final ElevationEnrichmentPort elevationEnrichmentPort;
     private final LightPollutionRatingEnrichmentPort lightPollutionRatingEnrichmentPort;
+    private final SpotMapper spotMapper = new SpotMapper();
 
     public CreateSpotHandler(SpotRepository spotRepository, ElevationEnrichmentPort elevationEnrichmentPort,
                              LightPollutionRatingEnrichmentPort lightPollutionRatingEnrichmentPort) {
@@ -25,8 +28,8 @@ public class CreateSpotHandler implements CreateSpotUseCase {
     }
 
     @Override
-    public Spot handle(CreateSpotCommand createSpotCommand) {
-        Location location = Location.create(createSpotCommand.latutide(), createSpotCommand.longitude());
+    public SpotDto handle(CreateSpotCommand createSpotCommand) {
+        Location location = Location.create(createSpotCommand.latitude(), createSpotCommand.longitude());
 
         Optional<Spot> spotOpt = spotRepository.findByLocation(location);
 
@@ -52,7 +55,7 @@ public class CreateSpotHandler implements CreateSpotUseCase {
 
         spotRepository.save(spot);
 
-        return spot;
+        return spotMapper.toSpotDto(spot);
 
     }
 

@@ -1,6 +1,5 @@
 package com.ppublica.stargazer.spotservice.api.controller;
 
-import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotservice.api.dto.CreateSpotRequest;
 import com.ppublica.stargazer.spotservice.spot.application.view.SpotDto;
 import com.ppublica.stargazer.spotservice.spot.application.mapper.SpotMapper;
@@ -10,7 +9,6 @@ import com.ppublica.stargazer.spotservice.spot.application.usecase.getspotbyid.G
 import com.ppublica.stargazer.spotservice.spot.application.usecase.getspotbyid.GetSpotByIdUseCase;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.publishspot.PublishSpotCommand;
 import com.ppublica.stargazer.spotservice.spot.application.usecase.publishspot.PublishSpotUseCase;
-import com.ppublica.stargazer.spotservice.spot.domain.model.Spot;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +35,7 @@ public class SpotController {
                 new CreateSpotCommand(
                         request.coordinates().latitude(), request.coordinates().longitude());
 
-        Spot newSpot = createSpotUseCase.handle(createSpotCommand);
-
-        return spotMapper.toSpotDto(newSpot);
+        return createSpotUseCase.handle(createSpotCommand);
 
     }
 
