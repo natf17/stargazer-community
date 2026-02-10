@@ -1,7 +1,7 @@
 package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.initializespotpersonalization;
 
-import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalization;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.SpotPersonalizationView;
 
 public interface InitializeSpotPersonalizationUseCase {
-    SpotPersonalization handle(InitializeSpotPersonalizationCommand command);
+    SpotPersonalizationView handle(InitializeSpotPersonalizationCommand command);
 }

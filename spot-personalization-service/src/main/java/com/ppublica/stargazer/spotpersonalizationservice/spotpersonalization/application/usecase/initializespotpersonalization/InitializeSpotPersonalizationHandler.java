@@ -5,8 +5,10 @@ import com.ppublica.stargazer.sharedkerneluser.UserId;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.exception.SpotNotFoundException;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.exception.SpotPersonalizationAlreadyExistsException;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.exception.UserNotFoundException;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.mapper.SpotPersonalizationMapper;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.port.spot.SpotLookupPort;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.port.user.UserLookupPort;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.SpotPersonalizationView;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalization;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalizationId;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.repository.SpotPersonalizationRepository;
@@ -18,6 +20,7 @@ public class InitializeSpotPersonalizationHandler implements InitializeSpotPerso
     private final SpotPersonalizationRepository repository;
     private final UserLookupPort userLookupPort;
     private final SpotLookupPort spotLookupPort;
+    private final SpotPersonalizationMapper spotPersonalizationMapper = new SpotPersonalizationMapper();
 
     public InitializeSpotPersonalizationHandler(SpotPersonalizationRepository spotPersonalizationRepository,
                                                 UserLookupPort userLookupPort,
@@ -28,7 +31,7 @@ public class InitializeSpotPersonalizationHandler implements InitializeSpotPerso
     }
 
     @Override
-    public SpotPersonalization handle(InitializeSpotPersonalizationCommand command) {
+    public SpotPersonalizationView handle(InitializeSpotPersonalizationCommand command) {
         SpotId spotId = command.spotId();
         UserId userId = command.userId();
         String name = command.name();
@@ -54,7 +57,9 @@ public class InitializeSpotPersonalizationHandler implements InitializeSpotPerso
 
         SpotPersonalization spotPersonalization = SpotPersonalization.create(id, userId, spotId, name);
 
-        return repository.save(spotPersonalization);
+        repository.save(spotPersonalization);
+
+        return spotPersonalizationMapper.toSpotPersonalizationView(spotPersonalization);
 
     }
 

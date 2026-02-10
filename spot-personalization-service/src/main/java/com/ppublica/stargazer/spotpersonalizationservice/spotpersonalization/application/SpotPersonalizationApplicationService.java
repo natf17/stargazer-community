@@ -46,6 +46,7 @@ import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.app
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.setvisibilityceiling.SetVisibilityCeilingUseCase;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.updatename.UpdateNameCommand;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.usecase.updatename.UpdateNameUseCase;
+import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.view.SpotPersonalizationView;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalization;
 import com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.domain.model.SpotPersonalizationId;
 import org.springframework.stereotype.Service;
@@ -125,7 +126,7 @@ public class SpotPersonalizationApplicationService {
 
     }
 
-    public SpotPersonalization initializeSpotMetadata(String spotId, String userId, String name) {
+    public SpotPersonalizationView initializeSpotPersonalization(String spotId, String userId, String name) {
         return this.initializeSpotPersonalizationUseCase.handle(
                 new InitializeSpotPersonalizationCommand(
                         SpotId.of(spotId), UserId.of(userId), name));

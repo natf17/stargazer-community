@@ -15,3 +15,31 @@ The application uses a microservice architecture and is built with Spring Cloud.
 - Spot metadata service: stores verified user-provided metadata for spots (name, description, amenities, accessibility, horizon visibility, terrain type, ...)
 - Spot metadata draft service: stores user-provided spot information that needs to be verified
 - Spot personalization service: provides user-specific spot personalizations (description, name, viewing logs) and orchestrates the user-facing spot view
+
+## URI Routes:
+- Spot personalization service:
+  - Read (user-facing):
+    - `/spot-view/{id}`
+    - `/spot-view`
+    - `/my/spots`
+  - Write:
+    - `/spot/{id}/personalization`
+    - `/spot/{id}/personalization/{command}`
+
+- Spot service:
+  - Read:
+    - `/spot/{id}`
+    - `/spots`
+    - `/spots/public`
+    - `/spots/by-ids`
+  - Write:
+    - `/spot`
+    - `/spot/{id}/publish`
+
+- Spot metadata service:
+  - Read:
+    - `/spot-metadata/by-spot/{spotId}`
+    - `/spot-metadata/by-spot`
+  - Write:
+    - `/spot-metadata`
+    - `/spot-metadata/{command}`

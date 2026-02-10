@@ -39,7 +39,7 @@ public class SpotController {
 
     }
 
-    @PostMapping("/publish/{id}")
+    @PostMapping("/{id}/publish")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void publishSpot(@PathVariable("id") String id) {
 

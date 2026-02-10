@@ -32,7 +32,7 @@ public class SpotsController {
         this.getSpotsByIdsUseCase = getSpotsByIdsUseCase;
     }
 
-    @RequestMapping("/all")
+    @RequestMapping()
     public List<SpotDto> browseAllAdmin() {
 
         return browseAllSpotsAdminUseCase.handle(new BrowseAllSpotsAdminQuery());
