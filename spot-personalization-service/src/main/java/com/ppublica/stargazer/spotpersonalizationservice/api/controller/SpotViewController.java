@@ -30,12 +30,12 @@ public class SpotViewController {
         this.getAllMySpotViewsUseCase = getAllMySpotViewsUseCase;
     }
 
-    @GetMapping("/spot/{id}")
+    @GetMapping("/spot-view/{id}")
     public SpotViewResponse getSpotView(@PathVariable String id, @AuthenticationPrincipal Jwt jwt) {
         return getSpotViewUseCase.execute(new GetSpotViewQuery(id, extractUserId(jwt)));
     }
 
-    @GetMapping("/spots")
+    @GetMapping("/spot-view")
     public SpotViewListResponse getAllSpotViews(@AuthenticationPrincipal Jwt jwt) {
         return getAllSpotViewsUseCase.execute(new GetAllSpotViewsQuery(extractUserId(jwt)));
     }
