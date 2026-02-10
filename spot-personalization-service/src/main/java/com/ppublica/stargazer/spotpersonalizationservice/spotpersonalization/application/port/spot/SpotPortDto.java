@@ -1,5 +1,3 @@
 package com.ppublica.stargazer.spotpersonalizationservice.spotpersonalization.application.port.spot;
 
-import com.ppublica.stargazer.sharedkernelspot.SpotId;
-
-public record SpotPortDto(SpotId spotId) {}
+public record SpotPortDto(String id, Coordinates coordinates, double elevationMeters, String bortleClass) {}
