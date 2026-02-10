@@ -1,6 +1,7 @@
 package com.ppublica.stargazer.spotmetadataservice.api.controller;
 
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
+import com.ppublica.stargazer.sharedkernelspotmetadata.SpotMetadataId;
 import com.ppublica.stargazer.spotmetadataservice.api.dto.InitializeSpotMetadataRequest;
 import com.ppublica.stargazer.spotmetadataservice.api.dto.SingleValueRequest;
 import com.ppublica.stargazer.spotmetadataservice.api.dto.SpotMetadataDto;
@@ -28,7 +29,6 @@ import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.useca
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.setvisibilityceiling.SetVisibilityCeilingCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.usecase.updatename.UpdateNameCommand;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadata;
-import com.ppublica.stargazer.spotmetadataservice.spotmetadata.domain.model.SpotMetadataId;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
