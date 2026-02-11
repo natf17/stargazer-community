@@ -39,5 +39,5 @@ public class ElevationEnrichmentAdapterTest {
         assertEquals(new ElevationData(38.0, ElevationSrc.PROVIDED), elevationData);
 
     }
-    
+
 }

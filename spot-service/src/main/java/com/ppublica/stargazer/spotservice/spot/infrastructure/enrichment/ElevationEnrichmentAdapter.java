@@ -5,8 +5,10 @@ import com.ppublica.stargazer.spotservice.spot.application.port.enrichment.Eleva
 import com.ppublica.stargazer.spotservice.spot.domain.model.ElevationSrc;
 import com.ppublica.stargazer.spotservice.spot.domain.model.Location;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@Component
 public class ElevationEnrichmentAdapter implements ElevationEnrichmentPort {
     private final WebClient webClient;
 
