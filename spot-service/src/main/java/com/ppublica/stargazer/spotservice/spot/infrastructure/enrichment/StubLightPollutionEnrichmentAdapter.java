@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 /*
  * As of February 2026, no official, stable, reliable API exists for sky brightness. Will look for a solution
  * in the near future.
+ * Maybe look into: https://github.com/Starrierskies/SQM-repository-repository
  */
 @Component
 public class StubLightPollutionEnrichmentAdapter implements LightPollutionRatingEnrichmentPort {
