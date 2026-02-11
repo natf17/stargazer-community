@@ -3,6 +3,7 @@ package com.ppublica.stargazer.spotmetadataservice.spotmetadata.infrastructure.s
 import com.ppublica.stargazer.sharedkernelspot.SpotId;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port.spot.SpotLocationDto;
 import com.ppublica.stargazer.spotmetadataservice.spotmetadata.application.port.spot.SpotLookupPort;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -14,9 +15,10 @@ public class SpotLookupAdapter implements SpotLookupPort {
 
     private final WebClient webClient;
 
-    public SpotLookupAdapter(WebClient.Builder builder) {
+    public SpotLookupAdapter(WebClient.Builder builder,
+                             @Value("${spot-service.base-url}") String baseUrl) {
         this.webClient = builder
-                .baseUrl("http://spot-service")
+                .baseUrl(baseUrl)
                 .build();
     }
     @Override
